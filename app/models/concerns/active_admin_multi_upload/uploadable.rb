@@ -6,7 +6,7 @@ module ActiveAdminMultiUpload::Uploadable
   end
 
   module ClassMethods
-    def allows_upload(name)
+    def allows_upload(name, gallery_class)
       code = <<-eoruby
         def to_jq_upload
           uploader = send("#{name}")
@@ -16,7 +16,7 @@ module ActiveAdminMultiUpload::Uploadable
             "size" => uploader.size,
             "url" => uploader.url,
             "thumbnail_url" => thumb_url,
-            "delete_url" => destroy_upload_admin_#{self.reflect_on_all_associations(:belongs_to).first.name.to_s.downcase.underscore}_#{uploader.instance.class.name.downcase.underscore}_url(self, only_path: true),
+            "delete_url" => destroy_upload_admin_#{gallery_class}_#{uploader.instance.class.name.downcase.underscore}_url(self, only_path: true),
             "id" => id,
             "delete_type" => "DELETE"
           }
