@@ -16,7 +16,7 @@ module ActiveAdminMultiUpload::Uploadable
             "size" => uploader.size,
             "url" => uploader.url,
             "thumbnail_url" => thumb_url,
-            "delete_url" => destroy_upload_admin_#{self.name.downcase.underscore}_#{uploader.instance.class.name.downcase.underscore}_url(self, only_path: true),
+            "delete_url" => destroy_upload_admin_#{self.class.reflect_on_all_associations(:belongs_to).first.name.to_s.downcase.underscore}_#{uploader.instance.class.name.downcase.underscore}_url(self, only_path: true),
             "id" => id,
             "delete_type" => "DELETE"
           }
