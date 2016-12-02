@@ -7,10 +7,10 @@ module ActiveAdminMultiUpload::Uploadable
 
   module ClassMethods
     def allows_upload(attachment_name, gallery_class, gallery_id)
-      gal_id = gallery_id.present? ? gallery_id : self.send("#{gallery_class}").id
 
       code = <<-eoruby
         def to_jq_upload
+          gal_id = gallery_id.present? ? gallery_id : self.send(gallery_class).id
           uploader = send("#{attachment_name}")
           thumb_url =  uploader.respond_to?(:thumb) ?  uploader.thumb.url : ""
           {
