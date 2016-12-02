@@ -6,6 +6,7 @@ module ActiveAdminMultiUpload
       config.resource_class.send(:include, ::ActiveAdminMultiUpload::Uploadable)
       uploader      = options[:mounted_uploader] || :image
       gallery_class = options[:gallery_class] || 'gallery'
+      gallery_id    = options[:gallery_id] || nil
       config.resource_class.send(:allows_upload,  uploader, gallery_class)
 
       collection_action :create_upload, method: :post do
