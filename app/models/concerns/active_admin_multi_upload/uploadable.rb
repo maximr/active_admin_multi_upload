@@ -12,7 +12,7 @@ module ActiveAdminMultiUpload::Uploadable
           uploader = send("#{name}")
           thumb_url =  uploader.respond_to?(:thumb) ?  uploader.thumb.url : ""
           {
-            "name" => uploader.filename,
+            "name" => uploader.original_filename,
             "size" => uploader.size,
             "url" => uploader.url,
             "thumbnail_url" => thumb_url,
